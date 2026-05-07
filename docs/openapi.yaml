@@ -1,0 +1,108 @@
+openapi: 3.1.0
+info:
+  title: Identity Access Audit API
+  version: 1.0.0
+  description: >
+    Recruiter-ready API for identity governance, privileged access analysis,
+    audit visibility, and remediation-aware access review workflows.
+servers:
+  - url: http://localhost:3000
+paths:
+  /health:
+    get:
+      summary: Service health status
+      responses:
+        '200':
+          description: Healthy service response
+  /api/users:
+    get:
+      summary: List users
+      responses:
+        '200':
+          description: Array of user records
+  /api/users/{id}:
+    get:
+      summary: Get one user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User record
+        '404':
+          description: User not found
+  /api/roles:
+    get:
+      summary: List roles
+      responses:
+        '200':
+          description: Array of role records
+  /api/entitlements:
+    get:
+      summary: List entitlements
+      responses:
+        '200':
+          description: Array of entitlement records
+  /api/applications:
+    get:
+      summary: List applications
+      responses:
+        '200':
+          description: Array of application records
+  /api/reviews:
+    get:
+      summary: List access reviews
+      responses:
+        '200':
+          description: Array of access review records
+  /api/findings:
+    get:
+      summary: List audit findings
+      responses:
+        '200':
+          description: Array of audit finding records
+  /api/dashboard/summary:
+    get:
+      summary: Dashboard summary
+      responses:
+        '200':
+          description: Aggregate audit and access review summary
+  /api/analyze/access-risk:
+    post:
+      summary: Analyze access risk
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Risk analysis
+  /api/analyze/exception:
+    post:
+      summary: Analyze policy exception posture
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Exception analysis
+  /api/analyze/remediation:
+    post:
+      summary: Analyze remediation priority
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Remediation analysis
